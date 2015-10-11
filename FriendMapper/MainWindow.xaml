@@ -2,13 +2,14 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
-        xmlns:ViewModels="clr-namespace:FriendMapper.ViewModels" x:Class="FriendMapper.MainWindow"
+        xmlns:ViewModels="clr-namespace:FriendMapper.ViewModels"
+        x:Name="mainWindow" x:Class="FriendMapper.MainWindow"
         Title="Friend Mapper" Height="350" Width="525">
     <Window.DataContext>
         <ViewModels:MainWindowViewModel />
     </Window.DataContext>
 
-    <Grid ScrollViewer.VerticalScrollBarVisibility="Disabled" ShowGridLines="True" IsManipulationEnabled="True">
+    <Grid x:Name="mainGrid" ScrollViewer.VerticalScrollBarVisibility="Disabled" ShowGridLines="True" IsManipulationEnabled="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="20" />
@@ -21,10 +22,21 @@
         <m:Map x:Name="friendMap" CredentialsProvider="As0m7iHT5ho1S3B9FjPmqDbeDE5vtatOxL3DzX-eWR-rSntGsLPM8kc3LT2fSAiB"
             Mode="{Binding MapMode, FallbackValue=Road, Mode=OneWay}" Center="51, 10" ZoomLevel="5" Margin="5" />
 
-        <ScrollViewer x:Name="friendsList" Grid.Column="1" Grid.RowSpan="2" Margin="5">
-            <Expander x:Name="fbFriends" Header="Facebook" Width="150">
-                <StackPanel x:Name="friendList" Background="#FFE5E5E5" />
-            </Expander>
+        <ScrollViewer x:Name="friendsList" Grid.Column="1" Grid.RowSpan="2"
+                      Content="{Binding FriendsProviders}">
+            <ScrollViewer.ContentTemplate>
+                <DataTemplate>
+                    <Expander x:Name="friendsProvider" Margin="5" Header="{Binding Name}">
+                        <ListView x:Name="friendList" ItemsSource="{Binding Friends}" Background="#FFE5E5E5" SelectionChanged="friendList_SelectionChanged" Margin="0,5,0,0">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Label x:Name="friend" Content="{Binding Name}" MouseDoubleClick="friend_MouseDoubleClick" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ListView>
+                    </Expander>
+                </DataTemplate>
+            </ScrollViewer.ContentTemplate>
         </ScrollViewer>
     </Grid>
 </Window>
