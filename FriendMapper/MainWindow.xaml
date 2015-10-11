@@ -1,0 +1,10 @@
+﻿<Window x:Class="FriendMapper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+        Title="Friend Mapper" Height="350" Width="525">
+    <Grid>
+        <m:Map x:Name="friendMap" CredentialsProvider="As0m7iHT5ho1S3B9FjPmqDbeDE5vtatOxL3DzX-eWR-rSntGsLPM8kc3LT2fSAiB"
+               Mode="Road" Center="51, 10" ZoomLevel="5" />
+    </Grid>
+</Window>
