@@ -5,11 +5,33 @@ using System.Linq;
 
 namespace FriendMapper.ViewModels
 {
+    /// <summary>
+    /// Represents the ViewModel for the grouped friends.
+    /// </summary>
     public class FriendsGroupViewModel : ViewModel
     {
+        private string name;
+
+        /// <summary>
+        /// Gets the friends.
+        /// </summary>
         public ObservableCollection<FriendViewModel> Friends { get; private set; }
 
-        public string Name { get; set; }
+        /// <summary>
+        /// Gets or sets the name of the Group.
+        /// </summary>
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                if (name == value)
+                    return;
+
+                name = value;
+                onPropertyChanged();
+            }
+        }
 
         public FriendsGroupViewModel()
         {

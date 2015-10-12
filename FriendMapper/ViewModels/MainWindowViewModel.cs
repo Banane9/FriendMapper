@@ -6,10 +6,19 @@ using System.Linq;
 
 namespace FriendMapper.ViewModels
 {
+    /// <summary>
+    /// Represents the ViewModel for the main window.
+    /// </summary>
     public sealed class MainWindowViewModel : ViewModel
     {
+        /// <summary>
+        /// Gets the grouped friends.
+        /// </summary>
         public ObservableCollection<FriendsGroupViewModel> FriendsGroups { get; private set; }
 
+        /// <summary>
+        /// Gets the map mode.
+        /// </summary>
         public MapMode MapMode
         {
             get { return new AerialMode(true); }

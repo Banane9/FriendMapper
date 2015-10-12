@@ -1,5 +1,6 @@
 ﻿using FontAwesome.WPF;
 using FriendMapper.ViewModels;
+using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,14 @@ namespace FriendMapper
                     foreach (var window in openedWindows.ToArray())
                         window.Close();
                 };
+
+            foreach (var friend in ((MainWindowViewModel)DataContext).FriendsGroups.SelectMany(group => group.Friends))
+            {
+                var pushpin = new Pushpin();
+                pushpin.Location = new Location(friend.Latitude, friend.Longitude);
+
+                friendMap.Children.Add(pushpin);
+            }
         }
 
         private void friendMapMarker_MouseDown(object sender, MouseButtonEventArgs e)

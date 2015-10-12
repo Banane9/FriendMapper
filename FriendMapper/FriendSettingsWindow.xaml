@@ -12,6 +12,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -22,10 +23,13 @@
         <Label Content="Name" VerticalAlignment="Center" HorizontalAlignment="Center" />
         <TextBox Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center" />
 
-        <Label Grid.Row="1" Content="Latitude" VerticalAlignment="Center" HorizontalAlignment="Center" />
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Latitude}" VerticalAlignment="Center" />
+        <Label Grid.Row="1" Content="Address" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Address}" VerticalAlignment="Center" />
 
-        <Label Grid.Row="2" Content="Longitude" VerticalAlignment="Center" HorizontalAlignment="Center" />
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Longitude}" VerticalAlignment="Center" />
+        <Label Grid.Row="2" Content="Latitude" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Latitude}" VerticalAlignment="Center" />
+
+        <Label Grid.Row="3" Content="Longitude" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Longitude}" VerticalAlignment="Center" />
     </Grid>
 </Window>
