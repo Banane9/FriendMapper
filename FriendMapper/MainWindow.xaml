@@ -21,6 +21,12 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <CollectionViewSource x:Key="GroupedFriends" Source="{Binding Friends}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Group" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
     </Window.Resources>
 
     <Grid x:Name="mainGrid" ScrollViewer.VerticalScrollBarVisibility="Disabled" ShowGridLines="True" IsManipulationEnabled="True">
@@ -37,43 +43,52 @@
             Mode="{Binding MapMode, FallbackValue=Road, Mode=OneWay}" Center="51, 10" ZoomLevel="5" Margin="5" />
 
         <ScrollViewer Grid.Column="1" Grid.RowSpan="2">
-            <ItemsControl x:Name="friendsList" ItemsSource="{Binding FriendsGroups}" Margin="5">
+            <ItemsControl x:Name="friendsList" ItemsSource="{Binding Source={StaticResource GroupedFriends}}">
+                <ItemsControl.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.ContainerStyle>
+                            <Style TargetType="GroupItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="GroupItem">
+                                            <Expander Header="{Binding}" FontSize="18" FontWeight="SemiBold" Margin="5">
+                                                <ItemsPresenter />
+                                            </Expander>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GroupStyle.ContainerStyle>
+                    </GroupStyle>
+                </ItemsControl.GroupStyle>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Expander x:Name="friendsGroup" Header="{Binding Name}" FontSize="18" FontWeight="SemiBold">
-                            <ItemsControl ItemsSource="{Binding Friends}" FontWeight="Normal" FontSize="16">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid Margin="10,5,0,0" Height="22">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="25" />
-                                                <ColumnDefinition Width="25" />
-                                            </Grid.ColumnDefinitions>
+                        <Grid Margin="10,5,0,0" Height="22">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="25" />
+                                <ColumnDefinition Width="25" />
+                            </Grid.ColumnDefinitions>
 
-                                            <TextBlock x:Name="friendName" Text="{Binding Name}" VerticalAlignment="Center" />
+                            <TextBlock x:Name="friendName" Text="{Binding Name}" VerticalAlignment="Center" FontWeight="Normal" FontSize="16" />
 
-                                            <fa:ImageAwesome x:Name="friendMapMarker" Grid.Column="1" Icon="MapMarker" Margin="1"
+                            <fa:ImageAwesome x:Name="friendMapMarker" Grid.Column="1" Icon="MapMarker" Margin="1"
                                                              Style="{StaticResource ButtonColor}" MouseDown="friendMapMarker_MouseDown" />
 
-                                            <fa:ImageAwesome x:Name="friendSettings" Grid.Column="2" Icon="Cog" Margin="1" MouseDown="friendSettings_MouseDown">
-                                                <fa:ImageAwesome.Style>
-                                                    <Style BasedOn="{StaticResource ButtonColor}" TargetType="fa:ImageAwesome">
-                                                        <Setter Property="Spin" Value="False" />
+                            <fa:ImageAwesome x:Name="friendSettings" Grid.Column="2" Icon="Cog" Margin="1" MouseDown="friendSettings_MouseDown">
+                                <fa:ImageAwesome.Style>
+                                    <Style BasedOn="{StaticResource ButtonColor}" TargetType="fa:ImageAwesome">
+                                        <Setter Property="Spin" Value="False" />
 
-                                                        <Style.Triggers>
-                                                            <Trigger Property="IsMouseOver" Value="True">
-                                                                <Setter Property="Spin" Value="True" />
-                                                            </Trigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </fa:ImageAwesome.Style>
-                                            </fa:ImageAwesome>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </Expander>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Spin" Value="True" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </fa:ImageAwesome.Style>
+                            </fa:ImageAwesome>
+                        </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

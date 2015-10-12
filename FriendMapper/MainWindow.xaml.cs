@@ -27,7 +27,7 @@ namespace FriendMapper
                         window.Close();
                 };
 
-            foreach (var friend in ((MainWindowViewModel)DataContext).FriendsGroups.SelectMany(group => group.Friends))
+            foreach (var friend in ((MainWindowViewModel)DataContext).Friends)
             {
                 var pushpin = new Pushpin();
                 pushpin.Location = new Location(friend.Latitude, friend.Longitude);

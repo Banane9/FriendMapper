@@ -14,7 +14,7 @@ namespace FriendMapper.ViewModels
         /// <summary>
         /// Gets the grouped friends.
         /// </summary>
-        public ObservableCollection<FriendsGroupViewModel> FriendsGroups { get; private set; }
+        public ObservableCollection<FriendViewModel> Friends { get; private set; }
 
         /// <summary>
         /// Gets the map mode.
@@ -26,9 +26,14 @@ namespace FriendMapper.ViewModels
 
         public MainWindowViewModel()
         {
-            FriendsGroups = new ObservableCollection<FriendsGroupViewModel>
+            Friends = new ObservableCollection<FriendViewModel>
             {
-                new FriendsGroupViewModel { Name = "Best" }
+                new FriendViewModel { Name = "Banane9", Latitude = 52, Longitude = 9, Group = "Me" },
+                new FriendViewModel { Name = "The", Latitude = 54, Longitude = 10, Group = "Joke" },
+                new FriendViewModel { Name = "Cake", Latitude = 53.4, Longitude = 9.7, Group = "Joke" },
+                new FriendViewModel { Name = "is", Latitude = 53, Longitude = 9, Group = "Joke" },
+                new FriendViewModel { Name = "a", Latitude = 53.5, Longitude = 9.5, Group = "Joke" },
+                new FriendViewModel { Name = "lie!", Latitude = 54, Longitude = 9, Group = "Joke" }
             };
         }
     }

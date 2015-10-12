@@ -10,6 +10,7 @@ namespace FriendMapper.ViewModels
     public class FriendViewModel : ViewModel
     {
         private string address;
+        private string group;
         private double latitude;
         private double longitude;
         private string name;
@@ -26,6 +27,22 @@ namespace FriendMapper.ViewModels
                     return;
 
                 address = value;
+                onPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the group of the friend.
+        /// </summary>
+        public string Group
+        {
+            get { return group; }
+            set
+            {
+                if (group == value)
+                    return;
+
+                group = value;
                 onPropertyChanged();
             }
         }
