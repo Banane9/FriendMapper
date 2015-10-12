@@ -56,7 +56,7 @@
                                             <fa:ImageAwesome x:Name="friendMapMarker" Grid.Column="1" Icon="MapMarker" Margin="1"
                                                              Style="{StaticResource ButtonColor}" MouseDown="friendMapMarker_MouseDown" />
 
-                                            <fa:ImageAwesome x:Name="friendSettings" Grid.Column="2" Icon="Cog" Margin="1">
+                                            <fa:ImageAwesome x:Name="friendSettings" Grid.Column="2" Icon="Cog" Margin="1" MouseDown="friendSettings_MouseDown">
                                                 <fa:ImageAwesome.Style>
                                                     <Style BasedOn="{StaticResource ButtonColor}" TargetType="fa:ImageAwesome">
                                                         <Setter Property="Spin" Value="False" />
