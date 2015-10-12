@@ -1,4 +1,5 @@
-﻿using FriendMapper.ViewModels;
+﻿using FontAwesome.WPF;
+using FriendMapper.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +18,10 @@ namespace FriendMapper
             InitializeComponent();
         }
 
-        private void ImageAwesome_MouseDown(object sender, MouseButtonEventArgs e)
+        private void friendMapMarker_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.AddedItems.Count < 1)
-                return;
-
-            var friend = (FriendViewModel)e.AddedItems[0];
-            friendMap.SetView(new Microsoft.Maps.MapControl.WPF.Location(friend.Latitude, friend.Longitude), 7);
+            var friend = (FriendViewModel)((ImageAwesome)sender).DataContext;
+            friendMap.SetView(new Microsoft.Maps.MapControl.WPF.Location(friend.Latitude, friend.Longitude), friendMap.ZoomLevel);
         }
     }
 }
