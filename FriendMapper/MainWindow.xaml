@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         xmlns:ViewModels="clr-namespace:FriendMapper.ViewModels"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         x:Name="mainWindow" x:Class="FriendMapper.MainWindow"
-        Title="Friend Mapper" Height="350" Width="525">
+        Title="Friend Mapper" Height="400" Width="650">
     <Window.DataContext>
         <ViewModels:MainWindowViewModel />
     </Window.DataContext>
@@ -12,31 +13,54 @@
     <Grid x:Name="mainGrid" ScrollViewer.VerticalScrollBarVisibility="Disabled" ShowGridLines="True" IsManipulationEnabled="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="20" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="250" />
         </Grid.ColumnDefinitions>
 
         <m:Map x:Name="friendMap" CredentialsProvider="As0m7iHT5ho1S3B9FjPmqDbeDE5vtatOxL3DzX-eWR-rSntGsLPM8kc3LT2fSAiB"
             Mode="{Binding MapMode, FallbackValue=Road, Mode=OneWay}" Center="51, 10" ZoomLevel="5" Margin="5" />
 
-        <ScrollViewer x:Name="friendsList" Grid.Column="1" Grid.RowSpan="2"
-                      Content="{Binding FriendsProviders}">
-            <ScrollViewer.ContentTemplate>
-                <DataTemplate>
-                    <Expander x:Name="friendsProvider" Margin="5" Header="{Binding Name}">
-                        <ListView x:Name="friendList" ItemsSource="{Binding Friends}" Background="#FFE5E5E5" SelectionChanged="friendList_SelectionChanged" Margin="0,5,0,0">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Label x:Name="friend" Content="{Binding Name}" MouseDoubleClick="friend_MouseDoubleClick" />
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ListView>
-                    </Expander>
-                </DataTemplate>
-            </ScrollViewer.ContentTemplate>
+        <ScrollViewer Grid.Column="1" Grid.RowSpan="2">
+            <ItemsControl x:Name="friendsList" ItemsSource="{Binding FriendsGroups}" Margin="5">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Expander x:Name="friendsGroup" Header="{Binding Name}" FontSize="18" FontWeight="SemiBold">
+                            <ItemsControl ItemsSource="{Binding Friends}" FontWeight="Normal" FontSize="16">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="10,5,0,0" Height="22">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="25" />
+                                                <ColumnDefinition Width="25" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
+                                            <fa:ImageAwesome Grid.Column="1" Icon="MapMarker" Margin="1" MouseDown="ImageAwesome_MouseDown" />
+                                            <fa:ImageAwesome Grid.Column="2" Icon="Cog" Margin="1">
+                                                <fa:ImageAwesome.Style>
+                                                    <Style TargetType="fa:ImageAwesome">
+                                                        <Setter Property="Spin" Value="False" />
+
+                                                        <Style.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Spin" Value="True" />
+                                                            </Trigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </fa:ImageAwesome.Style>
+                                            </fa:ImageAwesome>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Expander>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </ScrollViewer>
     </Grid>
 </Window>

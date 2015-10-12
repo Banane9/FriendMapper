@@ -8,7 +8,7 @@ namespace FriendMapper.ViewModels
 {
     public sealed class MainWindowViewModel : ViewModel
     {
-        public ObservableCollection<FriendsProvider> FriendsProviders { get; private set; }
+        public ObservableCollection<FriendsGroupViewModel> FriendsGroups { get; private set; }
 
         public MapMode MapMode
         {
@@ -17,9 +17,9 @@ namespace FriendMapper.ViewModels
 
         public MainWindowViewModel()
         {
-            FriendsProviders = new ObservableCollection<FriendsProvider>
+            FriendsGroups = new ObservableCollection<FriendsGroupViewModel>
             {
-                new FriendsProvider { Name = "Facebook" }
+                new FriendsGroupViewModel { Name = "Best" }
             };
         }
     }

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace FriendMapper.ViewModels
 {
-    public class Friend : ViewModel
+    public class FriendViewModel : ViewModel
     {
         public double Latitude { get; set; }
 
