@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Maps.MapControl.WPF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -60,6 +61,17 @@ namespace FriendMapper.ViewModels
 
                 latitude = value;
                 onPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets the map location.
+        /// </summary>
+        public Location Location
+        {
+            get
+            {
+                return new Location(latitude, longitude);
             }
         }
 

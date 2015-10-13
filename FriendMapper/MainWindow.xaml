@@ -40,7 +40,15 @@
         </Grid.ColumnDefinitions>
 
         <m:Map x:Name="friendMap" CredentialsProvider="As0m7iHT5ho1S3B9FjPmqDbeDE5vtatOxL3DzX-eWR-rSntGsLPM8kc3LT2fSAiB"
-            Mode="{Binding MapMode, FallbackValue=Road, Mode=OneWay}" Center="51, 10" ZoomLevel="5" Margin="5" />
+            Mode="{Binding MapMode, FallbackValue=Road, Mode=OneWay}" Center="51, 10" ZoomLevel="5" Margin="5">
+            <m:MapItemsControl ItemsSource="{Binding Friends}">
+                <m:MapItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <m:Pushpin Location="{Binding Location}" />
+                    </DataTemplate>
+                </m:MapItemsControl.ItemTemplate>
+            </m:MapItemsControl>
+        </m:Map>
 
         <ScrollViewer Grid.Column="1" Grid.RowSpan="2">
             <ItemsControl x:Name="friendsList" ItemsSource="{Binding Source={StaticResource GroupedFriends}}">
