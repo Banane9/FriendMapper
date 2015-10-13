@@ -12,6 +12,7 @@ namespace FriendMapper.ViewModels
     public class FriendViewModel : ViewModel
     {
         private string address;
+        private Color color = Color.FromRgb(0, 0, 0);
         private string group;
         private double latitude;
         private double longitude;
@@ -33,11 +34,19 @@ namespace FriendMapper.ViewModels
             }
         }
 
-        public Brush Color
+        /// <summary>
+        /// Gets or sets the color of the friend's marker.
+        /// </summary>
+        public Color Color
         {
-            get
+            get { return color; }
+            set
             {
-                return new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 0));
+                if (color == value)
+                    return;
+
+                color = value;
+                onPropertyChanged();
             }
         }
 
@@ -70,6 +79,7 @@ namespace FriendMapper.ViewModels
 
                 latitude = value;
                 onPropertyChanged();
+                onPropertyChanged("Location");
             }
         }
 
@@ -97,6 +107,7 @@ namespace FriendMapper.ViewModels
 
                 longitude = value;
                 onPropertyChanged();
+                onPropertyChanged("Location");
             }
         }
 

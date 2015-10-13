@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         xmlns:ViewModels="clr-namespace:FriendMapper.ViewModels"
+        xmlns:Converters="clr-namespace:FriendMapper.ValueConverters"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:FriendMapper"
         x:Name="mainWindow" x:Class="FriendMapper.MainWindow"
@@ -21,6 +22,8 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <Converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
 
         <CollectionViewSource x:Key="GroupedFriends" Source="{Binding Friends}">
             <CollectionViewSource.GroupDescriptions>
@@ -45,7 +48,7 @@
                 <m:MapItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Canvas Height="25" Width="17" m:MapLayer.PositionOrigin="BottomCenter" m:MapLayer.Position="{Binding Location}">
-                            <fa:ImageAwesome Icon="MapMarker" Height="25" Foreground="{Binding Color}" />
+                            <fa:ImageAwesome Icon="MapMarker" Height="25" Foreground="{Binding Color, Converter={StaticResource ColorToBrushConverter}}" />
                         </Canvas>
                     </DataTemplate>
                 </m:MapItemsControl.ItemTemplate>
