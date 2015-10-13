@@ -44,7 +44,9 @@
             <m:MapItemsControl ItemsSource="{Binding Friends}">
                 <m:MapItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <m:Pushpin Location="{Binding Location}" />
+                        <Canvas Height="25" Width="17" m:MapLayer.PositionOrigin="BottomCenter" m:MapLayer.Position="{Binding Location}">
+                            <fa:ImageAwesome Icon="MapMarker" Height="25" Foreground="{Binding Color}" />
+                        </Canvas>
                     </DataTemplate>
                 </m:MapItemsControl.ItemTemplate>
             </m:MapItemsControl>

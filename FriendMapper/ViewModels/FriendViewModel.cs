@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Media;
 
 namespace FriendMapper.ViewModels
 {
@@ -29,6 +30,14 @@ namespace FriendMapper.ViewModels
 
                 address = value;
                 onPropertyChanged();
+            }
+        }
+
+        public Brush Color
+        {
+            get
+            {
+                return new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 0));
             }
         }
 
