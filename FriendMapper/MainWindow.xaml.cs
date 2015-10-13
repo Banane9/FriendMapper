@@ -3,7 +3,7 @@ using FriendMapper.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -27,13 +27,23 @@ namespace FriendMapper
                 };
         }
 
-        private void addFriendPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        private async void addFriendPanel_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var newFriend = new FriendViewModel();
 
-            var friendSettingsWindow = showFriendSettingsWindow(newFriend);
+            var friendSettingsWindow = await showFriendSettingsWindow(newFriend);
 
             friendSettingsWindow.Closed += (_, __) => ((MainWindowViewModel)DataContext).Friends.Add(newFriend);
+        }
+
+        private void friendDelete_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var friend = (FriendViewModel)((ImageAwesome)sender).DataContext;
+
+            var messageBoxResult = MessageBox.Show("Do you really want to delete " + friend.Name + "?", "Confirm Deletion", MessageBoxButton.YesNo);
+
+            if (messageBoxResult == MessageBoxResult.Yes)
+                ((MainWindowViewModel)DataContext).Friends.Remove(friend);
         }
 
         private void friendMapMarker_MouseDown(object sender, MouseButtonEventArgs e)
@@ -47,7 +57,7 @@ namespace FriendMapper
             showFriendSettingsWindow((FriendViewModel)((ImageAwesome)sender).DataContext);
         }
 
-        private Window showFriendSettingsWindow(FriendViewModel friend)
+        private async Task<Window> showFriendSettingsWindow(FriendViewModel friend)
         {
             var friendSettingsWindow = new FriendSettingsWindow();
             friendSettingsWindow.Closed += (window, _) => openedWindows.Remove((Window)window);
@@ -56,7 +66,7 @@ namespace FriendMapper
             friendSettingsWindow.DataContext = friend;
             friendSettingsWindow.Show();
 
-            Thread.Sleep(10);
+            await Task.Delay(10);
 
             friendSettingsWindow.Activate();
             friendSettingsWindow.Focus();

@@ -34,7 +34,7 @@
         <Label Grid.Row="3" Content="Longitude" VerticalAlignment="Center" HorizontalAlignment="Center" />
         <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Longitude}" VerticalAlignment="Center" />
 
-        <Label Grid.Row="4" Content="Longitude" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <Label Grid.Row="4" Content="Marker Color" VerticalAlignment="Center" HorizontalAlignment="Center" />
         <EWPFT:ColorPicker Grid.Row="4" Grid.Column="1" SelectedColor="{Binding Color, FallbackValue=Black}" VerticalAlignment="Center" />
     </Grid>
 </Window>

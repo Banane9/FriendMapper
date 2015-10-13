@@ -108,16 +108,22 @@
                         <Grid Margin="10,5,0,0" Height="22">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="25" />
-                                <ColumnDefinition Width="25" />
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="20" />
                             </Grid.ColumnDefinitions>
 
                             <TextBlock x:Name="friendName" Text="{Binding Name}" VerticalAlignment="Center" FontWeight="Normal" FontSize="16" />
 
-                            <fa:ImageAwesome x:Name="friendMapMarker" Grid.Column="1" Icon="MapMarker" Margin="1"
-                                                             Style="{StaticResource ButtonColor}" MouseDown="friendMapMarker_MouseDown" />
+                            <fa:ImageAwesome x:Name="friendDelete" Grid.Column="1" Icon="TrashOutlined" Margin="1"
+                                             Style="{StaticResource ButtonColor}" MouseDown="friendDelete_MouseDown" />
 
-                            <fa:ImageAwesome x:Name="friendSettings" Grid.Column="2" Icon="Cog" Margin="1" MouseDown="friendSettings_MouseDown">
+                            <fa:ImageAwesome x:Name="friendMapMarker" Grid.Column="2" Icon="MapMarker" Margin="1"
+                                             Style="{StaticResource ButtonColor}" MouseDown="friendMapMarker_MouseDown"
+                                             HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                            <fa:ImageAwesome x:Name="friendSettings" Grid.Column="3" Icon="Cog" Margin="1" MouseDown="friendSettings_MouseDown"
+                                             HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <fa:ImageAwesome.Style>
                                     <Style BasedOn="{StaticResource ButtonColor}" TargetType="fa:ImageAwesome">
                                         <Setter Property="Spin" Value="False" />
