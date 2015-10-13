@@ -23,6 +23,30 @@
             </Style.Triggers>
         </Style>
 
+        <Style x:Key="StackPanelButton" TargetType="StackPanel">
+            <Style.Resources>
+                <Style TargetType="fa:ImageAwesome">
+                    <Setter Property="Foreground" Value="LightSlateGray" />
+
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=StackPanel}}" Value="True">
+                            <Setter Property="Foreground" Value="Black" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+
+                <Style TargetType="Label">
+                    <Setter Property="Foreground" Value="LightSlateGray" />
+
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=StackPanel}}" Value="True">
+                            <Setter Property="Foreground" Value="Black" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Style.Resources>
+        </Style>
+
         <Converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
 
         <CollectionViewSource x:Key="GroupedFriends" Source="{Binding Friends}">
@@ -44,7 +68,7 @@
 
         <m:Map x:Name="friendMap" CredentialsProvider="As0m7iHT5ho1S3B9FjPmqDbeDE5vtatOxL3DzX-eWR-rSntGsLPM8kc3LT2fSAiB"
             Mode="{Binding MapMode, FallbackValue=Road, Mode=OneWay}" Center="51, 10" ZoomLevel="5" Margin="5">
-            <m:MapItemsControl ItemsSource="{Binding Friends}">
+            <m:MapItemsControl x:Name="friendMarkers" ItemsSource="{Binding Friends}">
                 <m:MapItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Canvas Height="25" Width="17" m:MapLayer.PositionOrigin="BottomCenter" m:MapLayer.Position="{Binding Location}">
@@ -55,7 +79,12 @@
             </m:MapItemsControl>
         </m:Map>
 
-        <ScrollViewer Grid.Column="1" Grid.RowSpan="2">
+        <StackPanel x:Name="addFriendPanel" Style="{StaticResource StackPanelButton}" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" MouseDown="addFriendPanel_MouseDown">
+            <fa:ImageAwesome Icon="AddUser" Height="30" VerticalAlignment="Center" />
+            <Label Content="Add Friend" FontSize="18" Margin="0,0,10,0" VerticalAlignment="Center" Padding="10,5,5,5" />
+        </StackPanel>
+
+        <ScrollViewer x:Name="friendsListScroller" Grid.Column="1" Grid.RowSpan="2">
             <ItemsControl x:Name="friendsList" ItemsSource="{Binding Source={StaticResource GroupedFriends}}">
                 <ItemsControl.GroupStyle>
                     <GroupStyle>
