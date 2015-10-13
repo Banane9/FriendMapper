@@ -14,12 +14,17 @@
 
     <Window.Resources>
         <Style x:Key="ButtonColor" TargetType="fa:ImageAwesome">
-            <Setter Property="Foreground" Value="LightSlateGray" />
+            <Setter Property="Foreground" Value="Gray" />
+            <Setter Property="Opacity" Value="0" />
 
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Foreground" Value="Black" />
                 </Trigger>
+
+                <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}" Value="True">
+                    <Setter Property="Opacity" Value="100" />
+                </DataTrigger>
             </Style.Triggers>
         </Style>
 
@@ -93,7 +98,7 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="GroupItem">
-                                            <Expander Header="{Binding}" FontSize="18" FontWeight="SemiBold" Margin="5">
+                                            <Expander Header="{Binding}" FontSize="18" FontWeight="SemiBold" Margin="5,5,2,5">
                                                 <ItemsPresenter />
                                             </Expander>
                                         </ControlTemplate>
@@ -105,7 +110,19 @@
                 </ItemsControl.GroupStyle>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="10,5,0,0" Height="22">
+                        <Grid Height="22" Margin="4,0,0,0">
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Setter Property="Background" Value="White" />
+
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="GhostWhite" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="20" />
@@ -113,17 +130,15 @@
                                 <ColumnDefinition Width="20" />
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock x:Name="friendName" Text="{Binding Name}" VerticalAlignment="Center" FontWeight="Normal" FontSize="16" />
+                            <TextBlock x:Name="friendName" Text="{Binding Name}" VerticalAlignment="Center" FontWeight="Normal" FontSize="16" Margin="6,0,0,0" />
 
-                            <fa:ImageAwesome x:Name="friendDelete" Grid.Column="1" Icon="TrashOutlined" Margin="1"
+                            <fa:ImageAwesome x:Name="friendDelete" Grid.Column="1" Icon="TrashOutlined" Margin="4"
                                              Style="{StaticResource ButtonColor}" MouseDown="friendDelete_MouseDown" />
 
-                            <fa:ImageAwesome x:Name="friendMapMarker" Grid.Column="2" Icon="MapMarker" Margin="1"
-                                             Style="{StaticResource ButtonColor}" MouseDown="friendMapMarker_MouseDown"
-                                             HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <fa:ImageAwesome x:Name="friendMapMarker" Grid.Column="2" Icon="MapMarker" Margin="4"
+                                             Style="{StaticResource ButtonColor}" MouseDown="friendMapMarker_MouseDown" />
 
-                            <fa:ImageAwesome x:Name="friendSettings" Grid.Column="3" Icon="Cog" Margin="1" MouseDown="friendSettings_MouseDown"
-                                             HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <fa:ImageAwesome x:Name="friendSettings" Grid.Column="3" Icon="Cog" Margin="4" MouseDown="friendSettings_MouseDown">
                                 <fa:ImageAwesome.Style>
                                     <Style BasedOn="{StaticResource ButtonColor}" TargetType="fa:ImageAwesome">
                                         <Setter Property="Spin" Value="False" />
