@@ -18,8 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="2*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -70,13 +69,27 @@
             </fa:ImageAwesome>
         </Grid>
 
-        <Label Grid.Row="2" Content="Latitude" VerticalAlignment="Center" HorizontalAlignment="Center" />
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Latitude}" VerticalAlignment="Center" />
+        <GroupBox Grid.Row="2" Grid.ColumnSpan="2" Header="Coordinates" Margin="4">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-        <Label Grid.Row="3" Content="Longitude" VerticalAlignment="Center" HorizontalAlignment="Center" />
-        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Longitude}" VerticalAlignment="Center" />
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="4" Content="Marker Color" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <Label  Content="Latitude" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <TextBox Grid.Column="1" Text="{Binding Latitude}" VerticalAlignment="Center" />
+
+                <Label Grid.Row="1" Content="Longitude" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Longitude}" VerticalAlignment="Center" />
+            </Grid>
+        </GroupBox>
+
+        <Label Grid.Row="3" Content="Marker Color" VerticalAlignment="Center" HorizontalAlignment="Center" />
         <EWPFT:ColorPicker Grid.Row="4" Grid.Column="1" SelectedColor="{Binding Color, FallbackValue=Black}" VerticalAlignment="Center" />
     </Grid>
 </Window>
