@@ -78,6 +78,7 @@
       <DependentUpon>FriendSettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ValueConverters\ColorToBrushConverter.cs" />
+    <Compile Include="ValueConverters\StringToIsNullOrWhitespaceConverter.cs" />
     <Compile Include="ViewModels\FriendViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Page Include="FriendSettingsWindow.xaml">
