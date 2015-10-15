@@ -5,7 +5,7 @@
         xmlns:Converters="clr-namespace:FriendMapper.ValueConverters"
         xmlns:EWPFT="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
-        Title="Friend Settings" Height="300" Width="300">
+        Title="Friend Settings" Height="450" Width="300">
     <Window.DataContext>
         <ViewModels:FriendViewModel />
     </Window.DataContext>
@@ -17,8 +17,8 @@
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="1.5*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -27,47 +27,77 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
+        <CheckBox x:Name="Searchable" Visibility="Collapsed" />
+
         <Label Content="Name" VerticalAlignment="Center" HorizontalAlignment="Center" />
         <TextBox Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center" />
 
-        <Label Grid.Row="1" Content="Address" VerticalAlignment="Center" HorizontalAlignment="Center" />
-        <Grid Grid.Row="1" Grid.Column="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="25" />
-            </Grid.ColumnDefinitions>
+        <GroupBox Grid.Row="1" Grid.ColumnSpan="2" DataContext="{Binding Address}" Header="{Binding}" Margin="4">
+            <GroupBox.HeaderTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Height="26">
+                        <Label Content="Address" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <fa:ImageAwesome Grid.Column="1" Icon="Search" Margin="4">
+                            <fa:ImageAwesome.Style>
+                                <Style TargetType="fa:ImageAwesome">
+                                    <Setter Property="Foreground" Value="WhiteSmoke" />
 
-            <TextBox Text="{Binding Address}" VerticalAlignment="Center" />
-            <fa:ImageAwesome Grid.Column="1" Icon="Search" Margin="4">
-                <fa:ImageAwesome.Style>
-                    <Style TargetType="fa:ImageAwesome">
-                        <Setter Property="Foreground" Value="WhiteSmoke" />
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Searchable}" Value="True" />
+                                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True" />
+                                            </MultiDataTrigger.Conditions>
 
-                        <Style.Triggers>
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding Path=Children[0].Text, RelativeSource={RelativeSource Mode=FindAncestor,
-                                        AncestorType=Grid}, Converter={StaticResource StringToIsNullOrWhitespace}}" Value="False" />
-                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True" />
-                                </MultiDataTrigger.Conditions>
+                                            <Setter Property="Foreground" Value="Black" />
+                                        </MultiDataTrigger>
 
-                                <Setter Property="Foreground" Value="Black" />
-                            </MultiDataTrigger>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Searchable}" Value="True" />
+                                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="False" />
+                                            </MultiDataTrigger.Conditions>
 
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding Path=Children[0].Text, RelativeSource={RelativeSource Mode=FindAncestor,
-                                        AncestorType=Grid}, Converter={StaticResource StringToIsNullOrWhitespace}}" Value="False" />
-                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="False" />
-                                </MultiDataTrigger.Conditions>
+                                            <Setter Property="Foreground" Value="Gray" />
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </fa:ImageAwesome.Style>
+                        </fa:ImageAwesome>
+                    </StackPanel>
+                </DataTemplate>
+            </GroupBox.HeaderTemplate>
 
-                                <Setter Property="Foreground" Value="Gray" />
-                            </MultiDataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </fa:ImageAwesome.Style>
-            </fa:ImageAwesome>
-        </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Street" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <TextBox Grid.Column="1" Text="{Binding Street, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
+
+                <Label Grid.Row="1" Content="Postcode" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Postcode, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
+
+                <Label Grid.Row="2" Content="Town" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Town, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
+
+                <Label Grid.Row="3" Content="Region" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Region, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
+
+                <Label Grid.Row="4" Content="Country" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
+            </Grid>
+        </GroupBox>
 
         <GroupBox Grid.Row="2" Grid.ColumnSpan="2" Header="Coordinates" Margin="4">
             <Grid>

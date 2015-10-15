@@ -11,7 +11,7 @@ namespace FriendMapper.ViewModels
     /// </summary>
     public class FriendViewModel : ViewModel
     {
-        private string address;
+        private AddressViewModel address = new AddressViewModel();
         private Color color = Color.FromRgb(0, 0, 0);
         private string group;
         private double latitude;
@@ -21,7 +21,7 @@ namespace FriendMapper.ViewModels
         /// <summary>
         /// Gets or sets the address of the friend.
         /// </summary>
-        public string Address
+        public AddressViewModel Address
         {
             get { return address; }
             set

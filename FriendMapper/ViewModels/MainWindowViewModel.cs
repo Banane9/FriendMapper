@@ -21,7 +21,7 @@ namespace FriendMapper.ViewModels
         /// </summary>
         public MapMode MapMode
         {
-            get { return new AerialMode(true); }
+            get { return new RoadMode(); }
         }
 
         public MainWindowViewModel()
