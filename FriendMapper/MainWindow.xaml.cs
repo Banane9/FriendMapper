@@ -29,7 +29,7 @@ namespace FriendMapper
 
         private async void addFriendPanel_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var newFriend = new FriendViewModel();
+            var newFriend = new FriendViewModel { Name = "New Friend", Group = "New Friends" };
 
             var friendSettingsWindow = await showFriendSettingsWindow(newFriend);
 
