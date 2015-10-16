@@ -10,112 +10,171 @@
         <ViewModels:FriendViewModel />
     </Window.DataContext>
 
-    <Grid Margin="5">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="3*" />
-            <RowDefinition Height="1.5*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <TabControl Padding="0">
+        <TabItem Header="Names">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="1.5*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-        <CheckBox x:Name="Searchable" Visibility="Collapsed" />
+                <Label Content="Name" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <TextBox Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center" />
+            </Grid>
+        </TabItem>
 
-        <Label Content="Name" VerticalAlignment="Center" HorizontalAlignment="Center" />
-        <TextBox Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center" />
-
-        <GroupBox Grid.Row="1" Grid.ColumnSpan="2" DataContext="{Binding Address}" Header="{Binding}" Margin="4">
-            <GroupBox.HeaderTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Height="26">
-                        <Label Content="Address" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                        <fa:ImageAwesome x:Name="addressSearchButton" Grid.Column="1" Icon="Search" Margin="4" MouseDown="addressSearchButton_MouseDown">
-                            <fa:ImageAwesome.Style>
-                                <Style TargetType="fa:ImageAwesome">
-                                    <Setter Property="Foreground" Value="WhiteSmoke" />
-
-                                    <Style.Triggers>
-                                        <MultiDataTrigger>
-                                            <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding Searchable}" Value="True" />
-                                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True" />
-                                            </MultiDataTrigger.Conditions>
-
-                                            <Setter Property="Foreground" Value="Black" />
-                                        </MultiDataTrigger>
-
-                                        <MultiDataTrigger>
-                                            <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding Searchable}" Value="True" />
-                                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="False" />
-                                            </MultiDataTrigger.Conditions>
-
-                                            <Setter Property="Foreground" Value="Gray" />
-                                        </MultiDataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </fa:ImageAwesome.Style>
-                        </fa:ImageAwesome>
+        <TabItem Header="Locations" DataContext="{Binding Locations}">
+            <ScrollViewer>
+                <StackPanel Margin="5,5,5,0">
+                    <StackPanel x:Name="addLocationPanel" Style="{StaticResource StackPanelButton}" Margin="10"
+                                Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="addLocationPanel_MouseDown">
+                        <fa:ImageAwesome Icon="Plus" Height="14" VerticalAlignment="Center" Margin="0,0,2,0" />
+                        <fa:ImageAwesome Icon="MapMarker" Height="30" VerticalAlignment="Center" />
+                        <Label Content="Add Location" FontSize="18" VerticalAlignment="Center" Padding="10,0,0,0" />
                     </StackPanel>
-                </DataTemplate>
-            </GroupBox.HeaderTemplate>
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+                    <ItemsControl ItemsSource="{Binding}" Margin="0,0,0,10">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Expander Header="{Binding Name}" FontSize="18" FontWeight="SemiBold" Margin="0,15,0,0" Background="Ivory">
+                                    <StackPanel>
+                                        <StackPanel.Resources>
+                                            <Style TargetType="Label">
+                                                <Setter Property="FontSize" Value="12" />
+                                                <Setter Property="FontWeight" Value="Normal" />
+                                            </Style>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="90" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+                                            <Style TargetType="TextBox">
+                                                <Setter Property="FontSize" Value="12" />
+                                                <Setter Property="FontWeight" Value="Normal" />
+                                            </Style>
 
-                <Label Content="Street" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                <TextBox Grid.Column="1" Text="{Binding Street, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
+                                            <Style TargetType="GroupBox">
+                                                <Setter Property="FontSize" Value="12" />
+                                                <Setter Property="FontWeight" Value="Normal" />
+                                            </Style>
+                                        </StackPanel.Resources>
 
-                <Label Grid.Row="1" Content="Postcode" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Postcode, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
+                                        <Grid Margin="10,10,10,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="90" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
 
-                <Label Grid.Row="2" Content="Town" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Town, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
+                                            <Label Content="Name" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            <TextBox Grid.Column="1" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
+                                        </Grid>
 
-                <Label Grid.Row="3" Content="Region" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Region, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
+                                        <GroupBox Header="{Binding}" Grid.Row="1" Grid.ColumnSpan="2" Margin="4,10,4,0">
+                                            <GroupBox.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal" Height="26">
+                                                        <Label Content="Address" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                        <fa:ImageAwesome x:Name="addressSearchButton" Grid.Column="1" Icon="Search" Margin="4" MouseDown="addressSearchButton_MouseDown">
+                                                            <fa:ImageAwesome.Style>
+                                                                <Style TargetType="fa:ImageAwesome">
+                                                                    <Setter Property="Foreground" Value="WhiteSmoke" />
 
-                <Label Grid.Row="4" Content="Country" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
-            </Grid>
-        </GroupBox>
+                                                                    <Style.Triggers>
+                                                                        <MultiDataTrigger>
+                                                                            <MultiDataTrigger.Conditions>
+                                                                                <Condition Binding="{Binding Searchable}" Value="True" />
+                                                                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True" />
+                                                                            </MultiDataTrigger.Conditions>
 
-        <GroupBox Grid.Row="2" Grid.ColumnSpan="2" Header="Coordinates" Margin="4">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+                                                                            <Setter Property="Foreground" Value="Black" />
+                                                                        </MultiDataTrigger>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="90" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+                                                                        <MultiDataTrigger>
+                                                                            <MultiDataTrigger.Conditions>
+                                                                                <Condition Binding="{Binding Searchable}" Value="True" />
+                                                                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="False" />
+                                                                            </MultiDataTrigger.Conditions>
 
-                <Label  Content="Latitude" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                <TextBox Grid.Column="1" Text="{Binding Latitude}" VerticalAlignment="Center" />
+                                                                            <Setter Property="Foreground" Value="Gray" />
+                                                                        </MultiDataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </fa:ImageAwesome.Style>
+                                                        </fa:ImageAwesome>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </GroupBox.HeaderTemplate>
 
-                <Label Grid.Row="1" Content="Longitude" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Longitude}" VerticalAlignment="Center" />
-            </Grid>
-        </GroupBox>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                </Grid.RowDefinitions>
 
-        <Label Grid.Row="3" Content="Marker Color" VerticalAlignment="Center" HorizontalAlignment="Center" />
-        <EWPFT:ColorPicker Grid.Row="4" Grid.Column="1" SelectedColor="{Binding Color, FallbackValue=Black}" VerticalAlignment="Center" />
-    </Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="90" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <Label Content="Street" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                <TextBox Grid.Column="1" Text="{Binding Street, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
+
+                                                <Label Grid.Row="1" Content="Postcode" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Postcode, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
+
+                                                <Label Grid.Row="2" Content="Town" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Town, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
+
+                                                <Label Grid.Row="3" Content="Region" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Region, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
+
+                                                <Label Grid.Row="4" Content="Country" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
+                                            </Grid>
+                                        </GroupBox>
+
+                                        <GroupBox Grid.Row="2" Grid.ColumnSpan="2" Header="Coordinates" Margin="4,10,4,0">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                </Grid.RowDefinitions>
+
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="90" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <Label  Content="Latitude" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                <TextBox Grid.Column="1" Text="{Binding Latitude}" VerticalAlignment="Center" />
+
+                                                <Label Grid.Row="1" Content="Longitude" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Longitude}" VerticalAlignment="Center" />
+                                            </Grid>
+                                        </GroupBox>
+
+                                        <Grid Margin="10,15,10,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="90" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Content="Marker Color" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                            <EWPFT:ColorPicker Grid.Column="1" SelectedColor="{Binding Color, FallbackValue=Black}" VerticalAlignment="Center" />
+                                        </Grid>
+                                    </StackPanel>
+                                </Expander>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
+        </TabItem>
+    </TabControl>
 </Window>

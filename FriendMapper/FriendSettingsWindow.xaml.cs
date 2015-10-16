@@ -1,4 +1,4 @@
-﻿using BingGeocoder;
+﻿using FontAwesome.WPF;
 using FriendMapper.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,30 +13,19 @@ namespace FriendMapper
     /// </summary>
     public partial class FriendSettingsWindow : Window
     {
-        private GeoCoder geocoder = new GeoCoder("As0m7iHT5ho1S3B9FjPmqDbeDE5vtatOxL3DzX-eWR-rSntGsLPM8kc3LT2fSAiB", "FriendMapper", System.Globalization.CultureInfo.CurrentUICulture.Name);
-
         public FriendSettingsWindow()
         {
             InitializeComponent();
         }
 
+        private void addLocationPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ((FriendViewModel)DataContext).Locations.Insert(0, new LocationViewModel { Name = "New Location" });
+        }
+
         private async void addressSearchButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var friend = (FriendViewModel)DataContext;
-            var address = friend.Address;
-
-            if (!address.Searchable)
-                return;
-
-            var queryResult = await geocoder.GetCoordinate(
-                addressLine: address.Street,
-                locality: address.Town,
-                adminDistrict: address.Region,
-                postalCode: address.Postcode,
-                countryRegion: address.Country);
-
-            friend.Latitude = queryResult.Item1;
-            friend.Longitude = queryResult.Item2;
+            ((LocationViewModel)((ImageAwesome)sender).DataContext).searchAddress();
         }
     }
 }

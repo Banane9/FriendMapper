@@ -48,8 +48,11 @@ namespace FriendMapper
 
         private void friendMapMarker_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var friend = (FriendViewModel)((ImageAwesome)sender).DataContext;
-            friendMap.SetView(new Microsoft.Maps.MapControl.WPF.Location(friend.Latitude, friend.Longitude), friendMap.ZoomLevel);
+            // TODO: Perhaps add iterating through the locations.
+            var friendLocation = ((FriendViewModel)((ImageAwesome)sender).DataContext).Locations.FirstOrDefault();
+
+            if (friendLocation != null)
+                friendMap.SetView(new Microsoft.Maps.MapControl.WPF.Location(friendLocation.Latitude, friendLocation.Longitude), friendMap.ZoomLevel);
         }
 
         private void friendSettings_MouseDown(object sender, MouseButtonEventArgs e)

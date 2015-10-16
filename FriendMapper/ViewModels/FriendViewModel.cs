@@ -1,8 +1,7 @@
-﻿using Microsoft.Maps.MapControl.WPF;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Media;
 
 namespace FriendMapper.ViewModels
 {
@@ -11,44 +10,10 @@ namespace FriendMapper.ViewModels
     /// </summary>
     public class FriendViewModel : ViewModel
     {
-        private AddressViewModel address = new AddressViewModel();
-        private Color color = Color.FromRgb(0, 0, 0);
+        private static readonly Random random = new Random();
+
         private string group;
-        private double latitude;
-        private double longitude;
         private string name;
-
-        /// <summary>
-        /// Gets or sets the address of the friend.
-        /// </summary>
-        public AddressViewModel Address
-        {
-            get { return address; }
-            set
-            {
-                if (address == value)
-                    return;
-
-                address = value;
-                onPropertyChanged();
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the color of the friend's marker.
-        /// </summary>
-        public Color Color
-        {
-            get { return color; }
-            set
-            {
-                if (color == value)
-                    return;
-
-                color = value;
-                onPropertyChanged();
-            }
-        }
 
         /// <summary>
         /// Gets or sets the group of the friend.
@@ -67,49 +32,9 @@ namespace FriendMapper.ViewModels
         }
 
         /// <summary>
-        /// Gets or sets the latitude of the friend's address.
+        /// Gets the locations associated with the friend.
         /// </summary>
-        public double Latitude
-        {
-            get { return latitude; }
-            set
-            {
-                if (latitude == value)
-                    return;
-
-                latitude = value;
-                onPropertyChanged();
-                onPropertyChanged("Location");
-            }
-        }
-
-        /// <summary>
-        /// Gets the map location.
-        /// </summary>
-        public Location Location
-        {
-            get
-            {
-                return new Location(latitude, longitude);
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the longitude of the friend's address.
-        /// </summary>
-        public double Longitude
-        {
-            get { return longitude; }
-            set
-            {
-                if (longitude == value)
-                    return;
-
-                longitude = value;
-                onPropertyChanged();
-                onPropertyChanged("Location");
-            }
-        }
+        public ObservableCollection<LocationViewModel> Locations { get; private set; }
 
         /// <summary>
         /// Gets or sets the name of the friend.
@@ -125,6 +50,14 @@ namespace FriendMapper.ViewModels
                 name = value;
                 onPropertyChanged();
             }
+        }
+
+        public FriendViewModel()
+        {
+            Locations = new ObservableCollection<LocationViewModel>
+                {
+                    new LocationViewModel { Name = "Germany", Latitude= random.Next(48, 55), Longitude = random.Next(8, 14), Country = "Germany" }
+                };
         }
     }
 }

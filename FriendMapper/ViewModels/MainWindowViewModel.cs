@@ -12,7 +12,7 @@ namespace FriendMapper.ViewModels
     public sealed class MainWindowViewModel : ViewModel
     {
         /// <summary>
-        /// Gets the grouped friends.
+        /// Gets the friends.
         /// </summary>
         public ObservableCollection<FriendViewModel> Friends { get; private set; }
 
@@ -28,12 +28,12 @@ namespace FriendMapper.ViewModels
         {
             Friends = new ObservableCollection<FriendViewModel>
             {
-                new FriendViewModel { Name = "Banane9", Latitude = 52, Longitude = 9, Group = "Me" },
-                new FriendViewModel { Name = "The", Latitude = 54, Longitude = 10, Group = "Joke" },
-                new FriendViewModel { Name = "Cake", Latitude = 53.4, Longitude = 9.7, Group = "Joke" },
-                new FriendViewModel { Name = "is", Latitude = 53, Longitude = 9, Group = "Joke" },
-                new FriendViewModel { Name = "a", Latitude = 53.5, Longitude = 9.5, Group = "Joke" },
-                new FriendViewModel { Name = "lie!", Latitude = 54, Longitude = 9, Group = "Joke" }
+                new FriendViewModel { Name = "Banane9", Group = "Me" },
+                new FriendViewModel { Name = "The", Group = "Joke" },
+                new FriendViewModel { Name = "Cake", Group = "Joke" },
+                new FriendViewModel { Name = "is", Group = "Joke" },
+                new FriendViewModel { Name = "a", Group = "Joke" },
+                new FriendViewModel { Name = "lie!", Group = "Joke" }
             };
         }
     }
