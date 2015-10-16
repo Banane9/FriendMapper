@@ -10,10 +10,6 @@
         <ViewModels:FriendViewModel />
     </Window.DataContext>
 
-    <Window.Resources>
-        <Converters:StringToIsNullOrWhitespaceConverter x:Key="StringToIsNullOrWhitespace" />
-    </Window.Resources>
-
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -37,7 +33,7 @@
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Height="26">
                         <Label Content="Address" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                        <fa:ImageAwesome Grid.Column="1" Icon="Search" Margin="4">
+                        <fa:ImageAwesome x:Name="addressSearchButton" Grid.Column="1" Icon="Search" Margin="4" MouseDown="addressSearchButton_MouseDown">
                             <fa:ImageAwesome.Style>
                                 <Style TargetType="fa:ImageAwesome">
                                     <Setter Property="Foreground" Value="WhiteSmoke" />
