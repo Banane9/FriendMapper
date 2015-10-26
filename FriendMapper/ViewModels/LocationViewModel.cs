@@ -1,4 +1,5 @@
 ﻿using BingGeocoder;
+using FriendMapper.Models;
 using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.Collections.Generic;
@@ -17,28 +18,20 @@ namespace FriendMapper.ViewModels
             user_agent: "FriendMapper",
             culture: System.Globalization.CultureInfo.CurrentUICulture.Name);
 
-        private Color color = Color.FromRgb(0, 0, 0);
-        private string country;
-        private double latitude;
-        private double longitude;
-        private string name;
-        private string postcode;
-        private string region;
-        private string street;
-        private string town;
+        private readonly LocationModel model = new LocationModel();
 
         /// <summary>
         /// Gets or sets the color of the location's marker.
         /// </summary>
         public Color Color
         {
-            get { return color; }
+            get { return model.Color; }
             set
             {
-                if (color == value)
+                if (model.Color == value)
                     return;
 
-                color = value;
+                model.Color = value;
                 onPropertyChanged();
             }
         }
@@ -48,13 +41,13 @@ namespace FriendMapper.ViewModels
         /// </summary>
         public string Country
         {
-            get { return country; }
+            get { return model.Country; }
             set
             {
-                if (country == value)
+                if (model.Country == value)
                     return;
 
-                country = value; ;
+                model.Country = value; ;
                 onPropertyChanged();
                 onPropertyChanged("Searchable");
             }
@@ -65,13 +58,13 @@ namespace FriendMapper.ViewModels
         /// </summary>
         public double Latitude
         {
-            get { return latitude; }
+            get { return model.Latitude; }
             set
             {
-                if (latitude == value)
+                if (model.Latitude == value)
                     return;
 
-                latitude = value;
+                model.Latitude = value;
                 onPropertyChanged();
                 onPropertyChanged("Location");
             }
@@ -84,7 +77,7 @@ namespace FriendMapper.ViewModels
         {
             get
             {
-                return new Location(latitude, longitude);
+                return new Location(Latitude, Longitude);
             }
         }
 
@@ -93,13 +86,13 @@ namespace FriendMapper.ViewModels
         /// </summary>
         public double Longitude
         {
-            get { return longitude; }
+            get { return model.Longitude; }
             set
             {
-                if (longitude == value)
+                if (model.Longitude == value)
                     return;
 
-                longitude = value;
+                model.Longitude = value;
                 onPropertyChanged();
                 onPropertyChanged("Location");
             }
@@ -110,13 +103,13 @@ namespace FriendMapper.ViewModels
         /// </summary>
         public string Name
         {
-            get { return name; }
+            get { return model.Name; }
             set
             {
-                if (name == value)
+                if (model.Name == value)
                     return;
 
-                name = value;
+                model.Name = value;
                 onPropertyChanged();
             }
         }
@@ -126,13 +119,13 @@ namespace FriendMapper.ViewModels
         /// </summary>
         public string Postcode
         {
-            get { return postcode; }
+            get { return model.Postcode; }
             set
             {
-                if (postcode == value)
+                if (model.Postcode == value)
                     return;
 
-                postcode = value;
+                model.Postcode = value;
                 onPropertyChanged();
                 onPropertyChanged("Searchable");
             }
@@ -143,13 +136,13 @@ namespace FriendMapper.ViewModels
         /// </summary>
         public string Region
         {
-            get { return region; }
+            get { return model.Region; }
             set
             {
-                if (region == value)
+                if (model.Region == value)
                     return;
 
-                region = value;
+                model.Region = value;
                 onPropertyChanged();
                 onPropertyChanged("Searchable");
             }
@@ -171,13 +164,13 @@ namespace FriendMapper.ViewModels
         /// </summary>
         public string Street
         {
-            get { return street; }
+            get { return model.Street; }
             set
             {
-                if (street == value)
+                if (model.Street == value)
                     return;
 
-                street = value;
+                model.Street = value;
                 onPropertyChanged();
                 onPropertyChanged("Searchable");
             }
@@ -188,13 +181,13 @@ namespace FriendMapper.ViewModels
         /// </summary>
         public string Town
         {
-            get { return town; }
+            get { return model.Town; }
             set
             {
-                if (town == value)
+                if (model.Town == value)
                     return;
 
-                town = value;
+                model.Town = value;
                 onPropertyChanged();
                 onPropertyChanged("Searchable");
             }
@@ -218,11 +211,11 @@ namespace FriendMapper.ViewModels
 
         private IEnumerable<string> getAddressParts()
         {
-            yield return street;
-            yield return postcode;
-            yield return town;
-            yield return region;
-            yield return country;
+            yield return model.Street;
+            yield return model.Postcode;
+            yield return model.Town;
+            yield return model.Region;
+            yield return model.Country;
         }
     }
 }

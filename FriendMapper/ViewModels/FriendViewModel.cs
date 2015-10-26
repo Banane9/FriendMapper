@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FriendMapper.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -12,21 +13,20 @@ namespace FriendMapper.ViewModels
     {
         private static readonly Random random = new Random();
 
-        private string group;
-        private string name;
+        private readonly FriendModel model = new FriendModel(0);
 
         /// <summary>
         /// Gets or sets the group of the friend.
         /// </summary>
         public string Group
         {
-            get { return group; }
+            get { return model.Group; }
             set
             {
-                if (group == value)
+                if (model.Group == value)
                     return;
 
-                group = value;
+                model.Group = value;
                 onPropertyChanged();
             }
         }
@@ -41,13 +41,13 @@ namespace FriendMapper.ViewModels
         /// </summary>
         public string Name
         {
-            get { return name; }
+            get { return model.Name; }
             set
             {
-                if (name == value)
+                if (model.Name == value)
                     return;
 
-                name = value;
+                model.Name = value;
                 onPropertyChanged();
             }
         }
