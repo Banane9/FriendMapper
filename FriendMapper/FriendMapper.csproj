@@ -128,6 +128,11 @@
     <Compile Include="FriendSettingsWindow.xaml.cs">
       <DependentUpon>FriendSettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MapSettings\Bing\BingAerialLabelsMapSetting.cs" />
+    <Compile Include="MapSettings\Bing\BingAerialMapSetting.cs" />
+    <Compile Include="MapSettings\Bing\BingRoadMapSetting.cs" />
+    <Compile Include="MapSettings\CustomMapTileLayer.cs" />
+    <Compile Include="MapSettings\MapSetting.cs" />
     <Compile Include="Models\FriendModel.cs" />
     <Compile Include="Models\LocationModel.cs" />
     <Compile Include="Models\Model.cs" />

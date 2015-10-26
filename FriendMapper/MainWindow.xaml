@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+        xmlns:cm="clr-namespace:FriendMapper.MapSettings"
         xmlns:ViewModels="clr-namespace:FriendMapper.ViewModels"
         xmlns:Converters="clr-namespace:FriendMapper.ValueConverters"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
@@ -48,7 +49,9 @@
         </Grid.ColumnDefinitions>
 
         <m:Map x:Name="friendMap" CredentialsProvider="As0m7iHT5ho1S3B9FjPmqDbeDE5vtatOxL3DzX-eWR-rSntGsLPM8kc3LT2fSAiB"
-            Mode="{Binding MapMode, FallbackValue=Road, Mode=OneWay}" Center="51, 10" ZoomLevel="5" Margin="5">
+            Mode="{Binding MapSetting.MapMode, FallbackValue=Mercator, Mode=OneWay}" Center="51, 10" ZoomLevel="5" Margin="5">
+            <cm:CustomMapTileLayer TileSource="{Binding MapSetting.TileSource}" />
+
             <m:MapItemsControl x:Name="friendMarkers" ItemsSource="{Binding Friends}">
                 <m:MapItemsControl.ItemTemplate>
                     <DataTemplate>

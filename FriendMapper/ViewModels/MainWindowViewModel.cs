@@ -1,4 +1,5 @@
-﻿using Microsoft.Maps.MapControl.WPF;
+﻿using FriendMapper.MapSettings;
+using FriendMapper.MapSettings.Bing;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,15 +18,14 @@ namespace FriendMapper.ViewModels
         public ObservableCollection<FriendViewModel> Friends { get; private set; }
 
         /// <summary>
-        /// Gets the map mode.
+        /// Gets the <see cref="MapSetting"/> used.
         /// </summary>
-        public MapMode MapMode
-        {
-            get { return new RoadMode(); }
-        }
+        public MapSetting MapSetting { get; set; }
 
         public MainWindowViewModel()
         {
+            MapSetting = new BingRoadMapSetting();
+
             Friends = new ObservableCollection<FriendViewModel>
             {
                 new FriendViewModel { Name = "Banane9", Group = "Me" },
