@@ -9,7 +9,9 @@
         xmlns:ViewModels="clr-namespace:FriendMapper.ViewModels"
         xmlns:Converters="clr-namespace:FriendMapper.ValueConverters"
         x:Name="mainWindow" x:Class="FriendMapper.MainWindow"
-        Title="Friend Mapper" Height="400" Width="650">
+        Title="Friend Mapper"
+        MinHeight="300" Height="400"
+        MinWidth="612" Width="650">
     <Window.DataContext>
         <ViewModels:MainWindowViewModel />
     </Window.DataContext>
@@ -45,8 +47,9 @@
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="250" />
+            <ColumnDefinition MinWidth="350" Width="1.5*" />
+            <ColumnDefinition Width="4" />
+            <ColumnDefinition MinWidth="250" Width="*" />
         </Grid.ColumnDefinitions>
 
         <m:Map x:Name="friendMap" CredentialsProvider="As0m7iHT5ho1S3B9FjPmqDbeDE5vtatOxL3DzX-eWR-rSntGsLPM8kc3LT2fSAiB"
@@ -130,7 +133,9 @@
             </StackPanel>
         </Grid>
 
-        <ScrollViewer x:Name="friendsListScroller" Grid.Column="1" Grid.RowSpan="2">
+        <GridSplitter Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Stretch" />
+
+        <ScrollViewer x:Name="friendsListScroller" Grid.Column="2" Grid.RowSpan="2">
             <ItemsControl x:Name="friendsList" ItemsSource="{Binding Source={StaticResource GroupedFriends}}">
                 <ItemsControl.GroupStyle>
                     <GroupStyle>
