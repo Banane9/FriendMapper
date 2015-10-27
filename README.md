@@ -5,11 +5,8 @@ Have an overview over where your online friends are in the world!
 
 ##WIP Screenshots
 
-![MainWindow with map and friendslist.](http://puu.sh/kJSJV/f8db4597e2.jpg)
+![MainWindow with map and friendslist.](http://puu.sh/kYZNx/71283f66a9.png)
 
-![Friend Settings](http://puu.sh/kJSKA/8bb421584d.png)
+![Friend Settings - Main tab](http://puu.sh/kYZRK/b469e1996e.png)
 
-
-##Building
-
-Requires the [Bing Maps WPF SDK](https://www.microsoft.com/download/en/details.aspx?displaylang=en&id=27165)
+![Friend Settings - Locations tab](http://puu.sh/kYZW2/c582f1be6c.png)
