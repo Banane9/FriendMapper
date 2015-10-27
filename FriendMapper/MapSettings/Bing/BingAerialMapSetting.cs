@@ -10,11 +10,14 @@ namespace FriendMapper.MapSettings.Bing
     /// </summary>
     public sealed class BingAerialMapSetting : MapSetting
     {
-        private static MapMode aerialMapMode = new AerialMode();
+        public override bool IsBing
+        {
+            get { return true; }
+        }
 
         public override MapMode MapMode
         {
-            get { return aerialMapMode; }
+            get { return new AerialMode(); }
         }
     }
 }

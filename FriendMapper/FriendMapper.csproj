@@ -133,6 +133,7 @@
     <Compile Include="MapSettings\Bing\BingRoadMapSetting.cs" />
     <Compile Include="MapSettings\CustomMapTileLayer.cs" />
     <Compile Include="MapSettings\MapSetting.cs" />
+    <Compile Include="MapSettings\OpenStreetMapSetting.cs" />
     <Compile Include="Models\FriendModel.cs" />
     <Compile Include="Models\LocationModel.cs" />
     <Compile Include="Models\Model.cs" />

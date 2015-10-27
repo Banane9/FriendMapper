@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace FriendMapper
@@ -58,6 +59,12 @@ namespace FriendMapper
         private void friendSettings_MouseDown(object sender, MouseButtonEventArgs e)
         {
             showFriendSettingsWindow((FriendViewModel)((ImageAwesome)sender).DataContext);
+        }
+
+        private void mapSettings_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems != null && e.AddedItems.Count > 0)
+                ((MainWindowViewModel)DataContext).MapSetting = MapSettings.MapSetting.Settings[(string)e.AddedItems[0]];
         }
 
         private async Task<Window> showFriendSettingsWindow(FriendViewModel friend)

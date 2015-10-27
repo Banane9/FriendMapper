@@ -12,6 +12,8 @@ namespace FriendMapper.ViewModels
     /// </summary>
     public sealed class MainWindowViewModel : ViewModel
     {
+        private MapSetting mapSetting;
+
         /// <summary>
         /// Gets the friends.
         /// </summary>
@@ -20,7 +22,18 @@ namespace FriendMapper.ViewModels
         /// <summary>
         /// Gets the <see cref="MapSetting"/> used.
         /// </summary>
-        public MapSetting MapSetting { get; set; }
+        public MapSetting MapSetting
+        {
+            get { return mapSetting; }
+            set
+            {
+                if (mapSetting == value)
+                    return;
+
+                mapSetting = value;
+                onPropertyChanged();
+            }
+        }
 
         public MainWindowViewModel()
         {

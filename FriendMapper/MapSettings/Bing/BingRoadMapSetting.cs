@@ -10,11 +10,14 @@ namespace FriendMapper.MapSettings.Bing
     /// </summary>
     public sealed class BingRoadMapSetting : MapSetting
     {
-        private static MapMode roadMapMode = new RoadMode();
+        public override bool IsBing
+        {
+            get { return true; }
+        }
 
         public override MapMode MapMode
         {
-            get { return roadMapMode; }
+            get { return new RoadMode(); }
         }
     }
 }
